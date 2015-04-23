@@ -10,5 +10,16 @@ package schedulersimulator;
  * @author Henrique
  */
 public class ErrorSender {
+    public static void fileNotFound(){
+        System.out.println("Error 001 - File Not Found.");
+    }
+    
+    public static void invalidSchedulingPolicy(){
+        System.out.println("Error 002 - Invalid Scheduling Policy written on input text file."); 
+    }
+    
+    public static void invalidTextFile(){
+        System.out.println("Error 003 - Invalid text file");
+    }
     
 }

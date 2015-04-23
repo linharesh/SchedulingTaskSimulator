@@ -27,35 +27,39 @@ public class Initializer {
     public static void main(String[] args) throws IOException {
         Initializer init = new Initializer();
         init.readInputFile();
-        
+
     }
 
     public void readInputFile() throws IOException {
         try {
             BufferedReader inputFileReader = new BufferedReader(new FileReader(this.inputFileName));
-            
+
             String SchedulePolicy = inputFileReader.readLine();
-           
+
+            if (SchedulePolicy == null) {
+                ErrorSender.invalidTextFile();
+            }
+
             if (!SchedulePolicy.equalsIgnoreCase("fifo")) {
+                ErrorSender.invalidSchedulingPolicy();
                 return;
             }
-            
+
             String taskStringInfo = inputFileReader.readLine();
-            if (taskStringInfo == null){
-                System.out.println("Erro na formataçao do arquivo");
+            if (taskStringInfo == null) {
+                ErrorSender.invalidTextFile();
                 return;
             }
-            
+
             String[] splitedTaskStringInfo = taskStringInfo.split("-");
             
-            
-            
-            //Task T = new Task(splitedTaskStringInfo[0], splitedTaskStringInfo[1], splitedTaskStringInfo[2]);
+            String ArrivalTimeString = splitedTaskStringInfo[1];
             
             
 
+            //Task T = new Task(splitedTaskStringInfo[0], splitedTaskStringInfo[1], splitedTaskStringInfo[2]);
         } catch (FileNotFoundException ex) {
-            System.out.println("Error while reading input file!");
+            ErrorSender.fileNotFound();
         }
 
     }
