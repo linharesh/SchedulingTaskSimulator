@@ -27,6 +27,7 @@ public class Initializer {
     public static void main(String[] args) throws IOException {
         Initializer init = new Initializer();
         init.readInputFile();
+        
     }
 
     public void readInputFile() throws IOException {
