@@ -10,9 +10,10 @@ package schedulersimulator;
  * @author Henrique
  */
 public class Task {
-    private  String name;
-    private  int arrivalTime;
-    private  int executionTime;
+
+    private String name;
+    private int arrivalTime;
+    private int executionTime;
     private int executionTimeRemaining;
 
     public Task(String name, int arrivalTime, int executionTime) {
@@ -53,8 +54,12 @@ public class Task {
     public void setExecutionTimeRemaining(int executionTimeRemaining) {
         this.executionTimeRemaining = executionTimeRemaining;
     }
-    
-    
-    
-    
+
+    public String toString() {
+        String S = "The task named: " + this.getName() + " have Arrival Time : " + this.arrivalTime + " and wil execute for the time of : " + this.executionTime + ". It still "
+                + "remaining " + this.executionTimeRemaining + " time of execution.";
+
+        return S;
+    }
+
 }

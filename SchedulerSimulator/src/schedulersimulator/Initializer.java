@@ -53,7 +53,18 @@ public class Initializer {
 
             String[] splitedTaskStringInfo = taskStringInfo.split("-");
             
-            String ArrivalTimeString = splitedTaskStringInfo[1];
+            String arrivalTimeString = splitedTaskStringInfo[1];
+            
+            int arrivalTimeInt = Integer.parseInt(arrivalTimeString);
+            
+            String executionTimeString = splitedTaskStringInfo[2];
+            
+            int executionTimeInt = Integer.parseInt(executionTimeString);
+            
+            Task T = new Task(splitedTaskStringInfo[0], arrivalTimeInt, executionTimeInt);
+            
+            System.out.println(T.toString());
+            
             
             
 
