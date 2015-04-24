@@ -13,6 +13,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -45,12 +47,14 @@ public class Initializer {
                 return;
             }
 
+            List<Task> taskList = new ArrayList();
+            
+            
             String taskStringInfo = inputFileReader.readLine();
-            if (taskStringInfo == null) {
-                ErrorSender.invalidTextFile();
-                return;
-            }
+            
+            while (taskStringInfo != null) {
 
+            
             String[] splitedTaskStringInfo = taskStringInfo.split("-");
             
             String arrivalTimeString = splitedTaskStringInfo[1];
@@ -65,10 +69,21 @@ public class Initializer {
             
             System.out.println(T.toString());
             
+            taskList.add(T);
             
+            taskStringInfo = inputFileReader.readLine();
+            
+            }
+            
+            
+            Scheduler scheduler = new Scheduler(Policies.Fifo);
+            
+            Tasks tasks = new Tasks((ArrayList<Task>) taskList);
+            
+            SearchForEvent.EventSearcher(scheduler, tasks);
             
 
-            //Task T = new Task(splitedTaskStringInfo[0], splitedTaskStringInfo[1], splitedTaskStringInfo[2]);
+
         } catch (FileNotFoundException ex) {
             ErrorSender.fileNotFound();
         }
