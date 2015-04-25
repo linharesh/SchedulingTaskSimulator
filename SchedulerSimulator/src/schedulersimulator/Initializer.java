@@ -48,41 +48,36 @@ public class Initializer {
             }
 
             List<Task> taskList = new ArrayList();
-            
-            
+
             String taskStringInfo = inputFileReader.readLine();
-            
+
             while (taskStringInfo != null) {
 
-            
-            String[] splitedTaskStringInfo = taskStringInfo.split("-");
-            
-            String arrivalTimeString = splitedTaskStringInfo[1];
-            
-            int arrivalTimeInt = Integer.parseInt(arrivalTimeString);
-            
-            String executionTimeString = splitedTaskStringInfo[2];
-            
-            int executionTimeInt = Integer.parseInt(executionTimeString);
-            
-            Task T = new Task(splitedTaskStringInfo[0], arrivalTimeInt, executionTimeInt);
-            
-            System.out.println(T.toString());
-            
-            taskList.add(T);
-            
-            taskStringInfo = inputFileReader.readLine();
-            
-            }
-            
-            
-            Scheduler scheduler = new Scheduler(Policies.Fifo);
-            
-            Tasks tasks = new Tasks((ArrayList<Task>) taskList);
-            
-            SearchForEvent.EventSearcher(scheduler, tasks);
-            
+                String[] splitedTaskStringInfo = taskStringInfo.split("-");
 
+                String arrivalTimeString = splitedTaskStringInfo[1];
+
+                int arrivalTimeInt = Integer.parseInt(arrivalTimeString);
+
+                String executionTimeString = splitedTaskStringInfo[2];
+
+                int executionTimeInt = Integer.parseInt(executionTimeString);
+
+                Task T = new Task(splitedTaskStringInfo[0], arrivalTimeInt, executionTimeInt);
+
+                System.out.println(T.toString());
+
+                taskList.add(T);
+
+                taskStringInfo = inputFileReader.readLine();
+
+            }
+
+            Scheduler scheduler = new Scheduler(Policies.Fifo);
+
+            Tasks tasks = new Tasks((ArrayList<Task>) taskList);
+
+            SearchForEvent.EventSearcher(scheduler, tasks);
 
         } catch (FileNotFoundException ex) {
             ErrorSender.fileNotFound();

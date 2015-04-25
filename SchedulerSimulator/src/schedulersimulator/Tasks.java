@@ -26,6 +26,8 @@ public class Tasks {
 
             if (T.getArrivalTime() == time) {
                 returningArray.add(T);
+                this.taskList.remove(T);
+                taskListSize--;
             }
 
         }
