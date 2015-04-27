@@ -19,7 +19,12 @@ public class Processor {
     }
     
     public Task removeTaskInProcessor() {
+        System.out.println("Task leaving processor");
+    
         Task T = this.taskInProcessor;
+        
+        System.out.println(T.toString());
+        
         this.taskInProcessor = null;
         return T;
     }
@@ -35,12 +40,15 @@ public class Processor {
         System.out.println("Processor iterating");
         if (this.taskInProcessor != null) {
             System.out.println("Task running: " + this.taskInProcessor.toString());
-
-            this.taskInProcessor.setExecutionTimeRemaining(this.taskInProcessor.getExecutionTimeRemaining() - 1);
-            if (time == this.timeToLeave) {
+            System.out.println("time to leave: "+this.timeToLeave);
+            
+              if (this.taskInProcessor.getExecutionTimeRemaining() <= 0) {
                 return removeTaskInProcessor();
             }
 
+            
+            this.taskInProcessor.setExecutionTimeRemaining(this.taskInProcessor.getExecutionTimeRemaining() - 1);
+          
         } else {
             System.out.println("Processor empty");
         }

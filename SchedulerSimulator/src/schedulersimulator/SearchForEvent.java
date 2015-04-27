@@ -16,7 +16,7 @@ public class SearchForEvent {
     private static int time;
 
     public SearchForEvent() {
-        this.time = 0;
+        SearchForEvent.time = 0;
     }
 
     public static void searchIteration(int time, Scheduler scheduler, Tasks tasks, Processor processor) {

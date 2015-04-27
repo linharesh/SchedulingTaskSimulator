@@ -73,6 +73,12 @@ public class Initializer {
 
             }
 
+            //Close the input file after reading all info
+            inputFileReader.close();
+            
+            //Open the output file to start writing the logs
+            OutputFileWriter.setup();
+            
             Scheduler scheduler = new Scheduler(Policies.Fifo);
 
             Tasks tasks = new Tasks((ArrayList<Task>) taskList);
