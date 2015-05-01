@@ -54,6 +54,8 @@ public class SearchForEvent {
             SearchForEvent.time++;
         }
 
+        OutputFileWriter.close();
+        
     }
 
 }

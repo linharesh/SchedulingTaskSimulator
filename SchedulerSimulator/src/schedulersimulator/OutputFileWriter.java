@@ -44,10 +44,6 @@ public class OutputFileWriter {
         OutputFileWriter.bwriter.newLine();
         OutputFileWriter.bwriter.newLine();
 
-        OutputFileWriter.close();
-
-        System.out.println("Done");
-
     }
 
     public static void close() {
@@ -60,10 +56,6 @@ public class OutputFileWriter {
         OutputFileWriter.bwriter.write("Developers team: Henrique Linhares, Raphael Quintanilha, Diogo Souza and Fabrizio Moura");
         OutputFileWriter.bwriter.newLine();
         OutputFileWriter.bwriter.write("Universidade Federal Fluminense");
-            
-            
-            
-                
         
             OutputFileWriter.bwriter.close();
         } catch (IOException ex) {
