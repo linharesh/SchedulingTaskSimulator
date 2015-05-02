@@ -27,4 +27,9 @@ public class ErrorSender {
         System.out.println("Error 037 - Error while closing Output report file.");
     }
 
+    
+    public static void errorWritingTaskInfoIntoReport(){
+        System.out.println("Error 100 - Error while writing Task (entering in processor) infos in output report file.");
+    }
+    
 }

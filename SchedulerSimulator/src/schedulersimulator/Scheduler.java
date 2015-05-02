@@ -38,6 +38,7 @@ public class Scheduler {
     }
     
     public void schedulerIteration(Processor processor){
+       
         Task T;
         if (processor.isEmpty()) {
                     if (this.tasksToEnterInProcessor.size() > 0) {
@@ -51,15 +52,23 @@ public class Scheduler {
     public void schedulerIteration(ArrayList<Task> taskList, Processor processor) {
         if (this.Policie == Policie.Fifo) {
 
-            Task T = taskList.get(0);
-            if (T != null) {
+          //  Task T = taskList.get(0);
+            
+            if (!taskList.isEmpty()) { // IF the tasklist is NOT empty
+                Task T = taskList.remove(0);
                 if (processor.isEmpty()) {
                     processor.setTaskInProcessor(T, T.getExecutionTime());
                 } else {
                     this.tasksToEnterInProcessor.add(T);
+                    System.out.println("here we are adding a new task to the TASKTOENTERINPROCESSOR Array");
+                    System.out.println(T.toString());
                 }
+                
+                this.schedulerIteration(taskList, processor);
+                
             } 
         }
+        
     }
 
 }

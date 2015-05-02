@@ -1,4 +1,3 @@
 FIFO
-FirstTask-0-5
-SecondTask-1-2
-ThirdTask-7-10
+MyTask-1-3
+MyOtherTask-1-2

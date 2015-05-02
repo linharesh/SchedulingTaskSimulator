@@ -16,23 +16,43 @@ public class Tasks {
     private ArrayList<Task> taskList;
 
     public ArrayList<Task> searchForArrivalsAtTime(int time) {
+        
+        this.refreshDeletingDeliveredTasks(time);
 
         ArrayList<Task> returningArray = new ArrayList();
-        
-        int taskListSize = taskList.size();
+
         Task T;
-        for (int k = 0; k < taskListSize; k++) {
+        for (int k = 0; k < this.taskList.size(); k++) {
+
             T = taskList.get(k);
+
+            System.out.println();
 
             if (T.getArrivalTime() == time) {
                 returningArray.add(T);
-                this.taskList.remove(T);
-                taskListSize--;
+
             }
 
         }
 
         return returningArray;
+    }
+
+    public void refreshDeletingDeliveredTasks(int time) {
+        Task T;
+        for (int k = 0; k < this.taskList.size(); k++) {
+
+            T = taskList.get(k);
+
+
+            if (T.getArrivalTime() < time) {
+                this.taskList.remove(T);
+                k = 0;
+
+            }
+
+        }
+     
     }
 
     public Tasks(ArrayList<Task> taskList) {

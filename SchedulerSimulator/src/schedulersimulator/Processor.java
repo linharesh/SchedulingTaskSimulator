@@ -13,12 +13,21 @@ public class Processor {
 
     private Task taskInProcessor;
     int timeToLeave;
+    private int time;
+    
 
     public Processor(){
     taskInProcessor=null;
     }
     
+    public void setTime(int Time){
+    this.time=time;
+    }
+    
     public Task removeTaskInProcessor() {
+        
+        OutputFileWriter.writeTaskLeavingProcessorEvent(taskInProcessor, time);
+        
         System.out.println("Task leaving processor");
     
         Task T = this.taskInProcessor;
@@ -30,14 +39,18 @@ public class Processor {
     }
 
     public void setTaskInProcessor(Task taskInProcessor, int timeToLeave) {
+        OutputFileWriter.writeTaskEnteringProcessorEvent(taskInProcessor, time);
         System.out.println("Task entering processor");
         System.out.println("Task description: "+taskInProcessor.toString());
         this.taskInProcessor = taskInProcessor;
         this.timeToLeave = timeToLeave;
     }
+    
+    
 
     public Task processorItaration(int time) {
         System.out.println("Processor iterating");
+        this.time = time;
         if (this.taskInProcessor != null) {
             System.out.println("Task running: " + this.taskInProcessor.toString());
             System.out.println("time to leave: "+this.timeToLeave);

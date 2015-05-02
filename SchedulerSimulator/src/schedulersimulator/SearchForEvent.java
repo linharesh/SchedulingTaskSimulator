@@ -21,27 +21,33 @@ public class SearchForEvent {
 
     public static void searchIteration(int time, Scheduler scheduler, Tasks tasks, Processor processor) {
         ArrayList<Task> T = tasks.searchForArrivalsAtTime(time);
+        
+        System.out.println("");
+        
         if (!T.isEmpty()) {
             System.out.println("Task left the arrival queue");
-        }
-        System.out.println(T.toString());
-        if (!T.isEmpty()) {
+            System.out.println(T.toString());
             scheduler.schedulerIteration(T, processor);
         }
     }
 
-    public static boolean allTasksHaveFinished(Tasks tasks, Processor processor) {
+    public static boolean allTasksHaveFinished(Tasks tasks, Processor processor, Scheduler scheduler) {
+      
         if (!processor.isEmpty()) {
             return false;
         }
+        
         return (tasks.getTaskList().isEmpty());
+        
+       
     }
 
     public static void EventSearcher(Scheduler scheduler, Tasks tasks) {
         SearchForEvent.time = 0;
         Processor processor = new Processor();
+        processor.setTime(0);
 
-        while (!allTasksHaveFinished(tasks, processor)) {
+        while (!allTasksHaveFinished(tasks, processor, scheduler)) {
 
             System.out.println("Search for event is iterating! time: " + time);
 
@@ -52,6 +58,7 @@ public class SearchForEvent {
             scheduler.schedulerIteration(processor);
 
             SearchForEvent.time++;
+            processor.setTime(time);
         }
 
         OutputFileWriter.close();
