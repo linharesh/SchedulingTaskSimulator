@@ -49,11 +49,11 @@ public class SearchForEvent {
 
         while (!allTasksHaveFinished(tasks, processor, scheduler)) {
 
+            processor.processorItaration(SearchForEvent.time);
+            
             System.out.println("Search for event is iterating! time: " + time);
 
             searchIteration(SearchForEvent.time, scheduler, tasks, processor);
-
-            processor.processorItaration(SearchForEvent.time);
 
             scheduler.schedulerIteration(processor);
 
