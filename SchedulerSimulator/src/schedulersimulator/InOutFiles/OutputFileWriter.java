@@ -3,14 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package schedulersimulator;
+package schedulersimulator.InOutFiles;
 
+import schedulersimulator.InOutFiles.ErrorSender;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import schedulersimulator.Model.Task;
 
 /**
  *

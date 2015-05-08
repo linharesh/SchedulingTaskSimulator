@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package schedulersimulator;
+package schedulersimulator.Model;
+
+import schedulersimulator.InOutFiles.OutputFileWriter;
 
 /**
  *
@@ -26,7 +28,7 @@ public class Processor {
     
     public Task removeTaskInProcessor() {
         
-        OutputFileWriter.writeTaskLeavingProcessorEvent(taskInProcessor, time);
+        OutputFileWriter.writeTaskLeavingProcessorEvent(taskInProcessor, time - 1);
         
         System.out.println("Task leaving processor");
     

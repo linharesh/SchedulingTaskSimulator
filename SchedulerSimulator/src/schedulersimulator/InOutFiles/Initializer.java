@@ -3,20 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package schedulersimulator;
+package schedulersimulator.InOutFiles;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import schedulersimulator.Model.Policies;
+import schedulersimulator.Model.Scheduler;
+import schedulersimulator.Model.SearchForEvent;
+import schedulersimulator.Model.Task;
+import schedulersimulator.Model.Tasks;
 
 /**
  *
@@ -38,6 +37,7 @@ public class Initializer {
 
             String SchedulePolicy = inputFileReader.readLine();
 
+            
             if (SchedulePolicy == null) {
                 ErrorSender.invalidTextFile();
             }

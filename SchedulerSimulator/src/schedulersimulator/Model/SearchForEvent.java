@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package schedulersimulator;
+package schedulersimulator.Model;
 
+import schedulersimulator.InOutFiles.OutputFileWriter;
 import java.util.ArrayList;
 
 /**
