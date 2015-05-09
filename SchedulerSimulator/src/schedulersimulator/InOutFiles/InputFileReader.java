@@ -12,78 +12,51 @@
 
 package schedulersimulator.InOutFiles;
 
-import SchedulerClasses.Scheduler;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import schedulersimulator.Model.Policies;
-import SchedulerClasses.SchedulerFifo;
-import schedulersimulator.Model.SearchForEvent;
 import schedulersimulator.Model.Task;
-import schedulersimulator.Model.Tasks;
 
-/**
- *
- * @author Henrique
- */
-public class Initializer {
+public class InputFileReader {
 
     private final String inputFileName = "input.txt";
-
-    public static void main(String[] args) throws IOException {
-       // Initializer init = new Initializer();
-       // init.readInputFile();
-        
-        InputFileReader fileReaderInstance = new InputFileReader();
-      
-        prepareForStartSimulation(fileReaderInstance);
-        
-    }
-
     
-    public static void prepareForStartSimulation(InputFileReader instance){
+    public Policies policy;
+    
+    public  List<Task> taskList;
+
+    public InputFileReader(){
         try {
-            //Open the output file to start writing the logs
-            OutputFileWriter.setup();
+            this.read();
         } catch (IOException ex) {
-            Logger.getLogger(Initializer.class.getName()).log(Level.SEVERE, null, ex);
+            ErrorSender.generalInputFileReadingError();
         }
-            
-            Scheduler scheduler = new SchedulerFifo();
-
-            Tasks tasks = new Tasks((ArrayList<Task>) instance.taskList);
-
-            SearchForEvent.EventSearcher((SchedulerFifo) scheduler, tasks);
     }
     
     
-    /** @deprecated 
-     *  
-     * 
-     * @throws IOException 
-     */
-    public void readInputFile() throws IOException {
+    public void read() throws IOException {
         try {
             BufferedReader inputFileReader = new BufferedReader(new FileReader(this.inputFileName));
 
-            String SchedulePolicy = inputFileReader.readLine();
+            String schedulingPolicy = inputFileReader.readLine();
 
             
-            if (SchedulePolicy == null) {
+            if (schedulingPolicy == null) {
                 ErrorSender.invalidTextFile();
             }
 
-            if (!SchedulePolicy.equalsIgnoreCase("fifo")) {
+            this.policy = Policies.returnPolicieByName(schedulingPolicy);
+            
+            if (this.policy == null) {
                 ErrorSender.invalidSchedulingPolicy();
                 return;
             }
-
-            List<Task> taskList = new ArrayList();
+            
+            this.taskList = new ArrayList();
 
             String taskStringInfo = inputFileReader.readLine();
 
@@ -108,19 +81,10 @@ public class Initializer {
                 taskStringInfo = inputFileReader.readLine();
 
             }
-
-            //Close the input file after reading all info
+            
             inputFileReader.close();
             
-            //Open the output file to start writing the logs
-            OutputFileWriter.setup();
             
-            SchedulerFifo scheduler = new SchedulerFifo();
-
-            Tasks tasks = new Tasks((ArrayList<Task>) taskList);
-
-            SearchForEvent.EventSearcher(scheduler, tasks);
-
         } catch (FileNotFoundException ex) {
             ErrorSender.fileNotFound();
         }

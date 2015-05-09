@@ -26,6 +26,11 @@ public class Processor {
     this.time=time;
     }
     
+    public Task getRunningTaskInfo(){
+    return this.taskInProcessor;
+    }
+    
+    
     public Task removeTaskInProcessor() {
         
         OutputFileWriter.writeTaskLeavingProcessorEvent(taskInProcessor, time - 1);

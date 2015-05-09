@@ -11,17 +11,26 @@ package schedulersimulator.InOutFiles;
  */
 public class ErrorSender {
 
+    //*********************************************************************
+    //   ERROR 01X - ERRORS WHILE READING INPUT FILE
+    public static void generalInputFileReadingError(){
+        System.out.println("Error 010 - General error while reading input text file.");
+    }
+   
+    
     public static void fileNotFound() {
-        System.out.println("Error 001 - File Not Found.");
+        System.out.println("Error 011 - File Not Found.");
     }
 
     public static void invalidSchedulingPolicy() {
-        System.out.println("Error 002 - Invalid Scheduling Policy written on input text file.");
+        System.out.println("Error 012 - Invalid Scheduling Policy written on input text file.");
     }
 
     public static void invalidTextFile() {
-        System.out.println("Error 003 - Invalid text file");
+        System.out.println("Error 014 - Invalid text file");
     }
+    //*********************************************************************
+    
 
     public static void errorClosingOutputFile() {
         System.out.println("Error 037 - Error while closing Output report file.");

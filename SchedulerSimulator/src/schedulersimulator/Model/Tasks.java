@@ -26,8 +26,6 @@ public class Tasks {
 
             T = taskList.get(k);
 
-            System.out.println();
-
             if (T.getArrivalTime() == time) {
                 returningArray.add(T);
 
