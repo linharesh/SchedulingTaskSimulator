@@ -18,6 +18,8 @@ import schedulersimulator.Model.Task;
 
 public abstract class Scheduler {
     
-    public abstract void schedulerIteration(ArrayList<Task> taskList, Processor processor);
+    public abstract void schedulerSetup(ArrayList<Task> taskList);
+    
+    public abstract void schedulerIteration(Processor processor);
     
 }

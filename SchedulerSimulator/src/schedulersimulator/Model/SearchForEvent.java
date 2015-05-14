@@ -47,14 +47,16 @@ public class SearchForEvent {
         SearchForEvent.time = 0;
         Processor processor = new Processor();
         processor.setTime(0);
+        
+        scheduler.schedulerSetup(tasks.getTaskList());
 
         // while (!allTasksHaveFinished(tasks, processor, scheduler)) {
         while (time < 500) {
             System.out.println("Search for event is iterating! time: " + time);
 
-            searchIteration(SearchForEvent.time, scheduler, tasks, processor);
+            //searchIteration(SearchForEvent.time, scheduler, tasks, processor);
 
-            scheduler.schedulerIteration(tasks.getTaskList(), processor);
+            scheduler.schedulerIteration( processor);
 
             processor.processorItaration(SearchForEvent.time);
 

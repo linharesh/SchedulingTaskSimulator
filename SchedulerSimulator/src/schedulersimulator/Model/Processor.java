@@ -22,6 +22,10 @@ public class Processor {
     taskInProcessor=null;
     }
     
+    public int getTime(){
+    return this.time;
+    }
+    
     public void setTime(int Time){
     this.time=time;
     }
@@ -46,6 +50,11 @@ public class Processor {
     }
 
     public void setTaskInProcessor(Task taskInProcessor, int timeToLeave) {
+        
+        if (taskInProcessor.getArrivalTime() > this.time ){
+        return;
+        }
+        
         OutputFileWriter.writeTaskEnteringProcessorEvent(taskInProcessor, time);
         System.out.println("Task entering processor");
         System.out.println("Task description: "+taskInProcessor.toString());
