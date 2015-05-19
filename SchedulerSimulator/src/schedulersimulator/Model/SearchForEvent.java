@@ -21,16 +21,24 @@ public class SearchForEvent {
         SearchForEvent.time = 0;
     }
 
-    public static void searchIteration(int time, SchedulerFifo scheduler, Tasks tasks, Processor processor) {
+    /**@deprecated 
+     * 
+     * @param time
+     * @param scheduler
+     * @param tasks
+     * @param processor
+     * @return 
+     */
+    public static ArrayList<Task> searchIteration(int time, SchedulerFifo scheduler, Tasks tasks, Processor processor) {
         ArrayList<Task> T = tasks.searchForArrivalsAtTime(time);
 
-        System.out.println("");
 
         if (!T.isEmpty()) {
             System.out.println("Task left the arrival queue");
             System.out.println(T.toString());
-            scheduler.schedulerIteration(T, processor);
+            
         }
+        return null;
     }
 
     public static boolean allTasksHaveFinished(Tasks tasks, Processor processor, SchedulerFifo scheduler) {
@@ -48,7 +56,7 @@ public class SearchForEvent {
         Processor processor = new Processor();
         processor.setTime(0);
         
-        scheduler.schedulerSetup(tasks.getTaskList());
+        
 
         // while (!allTasksHaveFinished(tasks, processor, scheduler)) {
         while (time < 500) {
@@ -56,8 +64,13 @@ public class SearchForEvent {
 
             //searchIteration(SearchForEvent.time, scheduler, tasks, processor);
 
-            scheduler.schedulerIteration( processor);
-
+            if (tasks.searchForArrivalsAtTime(time).isEmpty()){
+                scheduler.schedulerIteration(processor);
+            } else {
+            scheduler.didArrivedTask(tasks.searchForArrivalsAtTime(time), processor);
+            }
+            
+            
             processor.processorItaration(SearchForEvent.time);
 
             SearchForEvent.time++;

@@ -16,13 +16,14 @@ import schedulersimulator.Model.Task;
 public class SchedulerSJF extends Scheduler {
 
 
+
     @Override
-    public void schedulerSetup(ArrayList<Task> taskList) {
+    public void schedulerIteration(Processor processor) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void schedulerIteration(Processor processor) {
+    public void didArrivedTask(ArrayList<Task> taskList, Processor processor) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
