@@ -1,8 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Scheduling Tasks Simulator Developers: Henrique Linhares, Raphael
+ * Quintanilha, Fabrizio Moura and Diogo Souza.
+ *
+ * Universidade Federal Fluminense
+ *
+ * https://github.com/linharesh/SchedulingTaskSimulator
+ *
+ * Please check the software documentation for more information.
  */
+
 package schedulersimulator.Model;
 
 /**
@@ -55,6 +61,7 @@ public class Task {
         this.executionTimeRemaining = executionTimeRemaining;
     }
 
+    @Override
     public String toString() {
         String S = "The task named: " + this.getName() + " have Arrival Time : " + this.arrivalTime + " and wil execute for the time of : " + this.executionTime + ". It still "
                 + "remaining " + this.executionTimeRemaining + " time of execution.";

@@ -1,26 +1,34 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Scheduling Tasks Simulator
+ * Developers: Henrique Linhares, Raphael Quintanilha, Fabrizio Moura and
+ * Diogo Souza.
+ * 
+ * Universidade Federal Fluminense
+ * 
+ * https://github.com/linharesh/SchedulingTaskSimulator
+ * 
+ * Please check the software documentation for more information.
  */
 package schedulersimulator.Model;
 
 import schedulersimulator.InOutFiles.OutputFileWriter;
 
-/**
+/** This class represents the simulation processor. 
+ * When a task enters the processor, it should enter into an instance of this class 
  *
  * @author Henrique
  */
 public class Processor {
 
     private Task taskInProcessor;
-    int timeToLeave;
     private int time;
 
+    
     public Processor() {
         taskInProcessor = null;
     }
 
+    
     public int getTime() {
         return this.time;
     }
@@ -33,43 +41,48 @@ public class Processor {
         return this.taskInProcessor;
     }
 
-    public Task didTaskExecutionFinished() {
-
+    /** Removes the task that was in the processor.       
+     * 
+     * @return An instance of the task that was removed from the processor.
+     */
+    public Task removeTaskFromProcessor() {
         OutputFileWriter.writeTaskLeavingProcessorEvent(taskInProcessor, time);
-
-        System.out.println("Task leaving processor");
-
-        Task T = this.taskInProcessor;
-
-        System.out.println(T.toString());
-
-        this.taskInProcessor = null;
-        return T;
-    }
-
-    public Task removeFromProcessor() {
         Task T = this.taskInProcessor;
         this.taskInProcessor = null;
         return T;
     }
 
-    public void setTaskInProcessor(Task taskInProcessor, int timeToLeave) {
 
+    /**Method used to add a new task into the processor.
+     * 
+     * @param taskInProcessor The Task that you want to put in the processor.
+     */
+    public void setTaskInProcessor(Task taskInProcessor) {
         OutputFileWriter.writeTaskEnteringProcessorEvent(taskInProcessor, time);
         System.out.println("Task entering processor");
         System.out.println("Task description: " + taskInProcessor.toString());
         this.taskInProcessor = taskInProcessor;
-        this.timeToLeave = timeToLeave;
     }
 
+    
+    /** This method represents an iteration of the processor. 
+     * Verify if the task had finished running. 
+     * If the task is already done, remove the processor task. 
+     * If the task have not finished , decrements the remaining time of task execution(ExecutionTimeRemaining) .
+     * 
+     * @param time The time that the simulation is.
+     *   This value should be passed from SearchForEvent(or any other class that calls this method).
+     * 
+     * 
+     * @return If the task is leaving the processor, returns the task that was inside the processor.
+     *         If the task is not leaving the processor, dont return nothing (return null)
+     */
     public Task processorIteration(int time) {
         System.out.println("Processor iterating");
         if (this.taskInProcessor != null) {
-            System.out.println("Task running: " + this.taskInProcessor.toString());
-            System.out.println("time to leave: " + this.timeToLeave);
-
+            
             if (this.taskInProcessor.getExecutionTimeRemaining() <= 0) {
-                return didTaskExecutionFinished();
+                return removeTaskFromProcessor();
             }
 
             this.taskInProcessor.setExecutionTimeRemaining(this.taskInProcessor.getExecutionTimeRemaining() - 1);
@@ -82,6 +95,12 @@ public class Processor {
         return null;
     }
 
+    
+    /** This method verify if there is any task inside the processor.
+     * 
+     * @return If there is no task within the processor, returns TRUE.
+     *          If there is any task within the processor, returns FALSE.
+     */
     public boolean isEmpty() {
         if (taskInProcessor != null) {
             return false;

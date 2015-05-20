@@ -1,25 +1,35 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Scheduling Tasks Simulator
+ * Developers: Henrique Linhares, Raphael Quintanilha, Fabrizio Moura and
+ * Diogo Souza.
+ * 
+ * Universidade Federal Fluminense
+ * 
+ * https://github.com/linharesh/SchedulingTaskSimulator
+ * 
+ * Please check the software documentation for more information.
  */
+
+
 package SchedulerClasses;
 
 import java.util.ArrayList;
-import schedulersimulator.Model.Policies;
 import schedulersimulator.Model.Processor;
 import schedulersimulator.Model.Task;
-import schedulersimulator.Model.Tasks;
 
-/**
- *
+/**Class that implements a first in - first out scheduler.
+ * In the FIFO policy, the first task to arrive the simulator will be the first one to run and finish.
+ * 
  * @author Henrique
  */
 public class SchedulerFifo extends Scheduler {
 
     private ArrayList<Task> waitingTaskList;
     
-    
+    /**Constructor
+     * Create a new ArrayList for the local and private ArrayList waitingTaskList.
+     * Its necessary to create a instance of the ArrayList() before start using it.
+     */
     public SchedulerFifo(){
     this.waitingTaskList = new ArrayList<>();
     }
@@ -32,7 +42,7 @@ public class SchedulerFifo extends Scheduler {
             if (!this.waitingTaskList.isEmpty()) {
                
                 Task T = waitingTaskList.remove(0);
-                processor.setTaskInProcessor(T, T.getExecutionTimeRemaining());
+                processor.setTaskInProcessor(T);
             }
         }
 
@@ -47,7 +57,7 @@ public class SchedulerFifo extends Scheduler {
 
                 Task T = taskList.remove(0); //Get the first task of the taskList
 
-                processor.setTaskInProcessor(T, T.getExecutionTimeRemaining()); //Put the task in the processor
+                processor.setTaskInProcessor(T); //Put the task in the processor
 
                 if (!taskList.isEmpty()) { //If the taskList still not empty
                     while (!taskList.isEmpty()) {

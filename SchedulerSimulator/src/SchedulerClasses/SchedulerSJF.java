@@ -28,7 +28,7 @@ public class SchedulerSJF extends Scheduler {
             if (!this.waitingTaskList.isEmpty()) {
 
                 Task T = this.getTheTaskWithTheShortestTime();
-                processor.setTaskInProcessor(T, T.getExecutionTimeRemaining());
+                processor.setTaskInProcessor(T);
             }
         }
     }
@@ -41,7 +41,7 @@ public class SchedulerSJF extends Scheduler {
 
                 Task T = taskList.remove(0); //Get the first task of the taskList
 
-                processor.setTaskInProcessor(T, T.getExecutionTimeRemaining()); //Put the task in the processor
+                processor.setTaskInProcessor(T); //Put the task in the processor
 
                 if (!taskList.isEmpty()) { //If the taskList still not empty
                     while (!taskList.isEmpty()) {
@@ -60,9 +60,9 @@ public class SchedulerSJF extends Scheduler {
             Task shortestTimeTask = getTheTaskWithTheShortestTime();
 
             if (shortestTimeTask.getExecutionTime() < taskInsideProcessor.getExecutionTime()) {
-               processor.didTaskExecutionFinished();
+               processor.removeTaskFromProcessor();
 
-                processor.setTaskInProcessor(shortestTimeTask, shortestTimeTask.getExecutionTimeRemaining());
+                processor.setTaskInProcessor(shortestTimeTask);
 
                 this.waitingTaskList.add(taskInsideProcessor);
 

@@ -1,7 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Scheduling Tasks Simulator
+ * Developers: Henrique Linhares, Raphael Quintanilha, Fabrizio Moura and
+ * Diogo Souza.
+ * 
+ * Universidade Federal Fluminense
+ * 
+ * https://github.com/linharesh/SchedulingTaskSimulator
+ * 
+ * Please check the software documentation for more information.
  */
 package schedulersimulator.Model;
 
@@ -15,9 +21,13 @@ public class Tasks {
 
     private ArrayList<Task> taskList;
 
+    /** Search all tasks and returns the tasks that have Arrival Time equals to the number in param.
+     * 
+     * @param time The number that this method will search in Tasks`s arrival time.
+     * @return An ArrayList containing all the tasks that have Arrival Time equals to the param "time"
+     */
     public ArrayList<Task> searchForArrivalsAtTime(int time) {
-        
-  //      this.refreshDeletingDeliveredTasks(time);
+ 
 
         ArrayList<Task> returningArray = new ArrayList();
 
@@ -34,23 +44,6 @@ public class Tasks {
         }
 
         return returningArray;
-    }
-
-    public void refreshDeletingDeliveredTasks(int time) {
-        Task T;
-        for (int k = 0; k < this.taskList.size(); k++) {
-
-            T = taskList.get(k);
-
-
-            if (T.getArrivalTime() < time) {
-                this.taskList.remove(T);
-                k = 0;
-
-            }
-
-        }
-     
     }
 
     public Tasks(ArrayList<Task> taskList) {
