@@ -5,6 +5,7 @@
  */
 package schedulersimulator.Model;
 
+import SchedulerClasses.Scheduler;
 import SchedulerClasses.SchedulerFifo;
 import schedulersimulator.InOutFiles.OutputFileWriter;
 import java.util.ArrayList;
@@ -14,25 +15,25 @@ import java.util.ArrayList;
  * @author Henrique
  */
 public class SearchForEvent {
-
+    
     private static int time;
-
+    
     public SearchForEvent() {
         SearchForEvent.time = 0;
     }
 
-    /**@deprecated 
-     * 
+    /**
+     * @deprecated
+     *
      * @param time
      * @param scheduler
      * @param tasks
      * @param processor
-     * @return 
+     * @return
      */
     public static ArrayList<Task> searchIteration(int time, SchedulerFifo scheduler, Tasks tasks, Processor processor) {
         ArrayList<Task> T = tasks.searchForArrivalsAtTime(time);
-
-
+        
         if (!T.isEmpty()) {
             System.out.println("Task left the arrival queue");
             System.out.println(T.toString());
@@ -40,45 +41,46 @@ public class SearchForEvent {
         }
         return null;
     }
-
+    
     public static boolean allTasksHaveFinished(Tasks tasks, Processor processor, SchedulerFifo scheduler) {
-
+        
         if (!processor.isEmpty()) {
             return false;
         }
-
+        
         return (tasks.getTaskList().isEmpty());
-
+        
     }
-
-    public static void EventSearcher(SchedulerFifo scheduler, Tasks tasks) {
+    
+    public static void EventSearcher(Scheduler scheduler, Tasks tasks) {
         SearchForEvent.time = 0;
         Processor processor = new Processor();
         processor.setTime(0);
-        
-        
 
         // while (!allTasksHaveFinished(tasks, processor, scheduler)) {
         while (time < 500) {
             System.out.println("Search for event is iterating! time: " + time);
 
             //searchIteration(SearchForEvent.time, scheduler, tasks, processor);
-
-            if (tasks.searchForArrivalsAtTime(time).isEmpty()){
+            if (tasks.searchForArrivalsAtTime(time).isEmpty()) {
                 scheduler.schedulerIteration(processor);
             } else {
-            scheduler.didArrivedTask(tasks.searchForArrivalsAtTime(time), processor);
+                scheduler.didArrivedTask(tasks.searchForArrivalsAtTime(time), processor);
             }
             
+            Task T = processor.processorIteration(SearchForEvent.time);
             
-            processor.processorItaration(SearchForEvent.time);
-
+            if (T != null) {
+                scheduler.schedulerIteration(processor);
+                processor.processorIteration(SearchForEvent.time);
+            }
+            
             SearchForEvent.time++;
             processor.setTime(time);
         }
-
+        
         OutputFileWriter.close();
-
+        
     }
-
+    
 }

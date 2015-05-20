@@ -15,17 +15,83 @@ import schedulersimulator.Model.Task;
  */
 public class SchedulerSJF extends Scheduler {
 
+    private ArrayList<Task> waitingTaskList;
 
+    public SchedulerSJF() {
+        this.waitingTaskList = new ArrayList<>();
+    }
 
     @Override
     public void schedulerIteration(Processor processor) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (processor.isEmpty()) { // if the processor is empty
+
+            if (!this.waitingTaskList.isEmpty()) {
+
+                Task T = this.getTheTaskWithTheShortestTime();
+                processor.setTaskInProcessor(T, T.getExecutionTimeRemaining());
+            }
+        }
     }
 
     @Override
     public void didArrivedTask(ArrayList<Task> taskList, Processor processor) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (processor.isEmpty()) { // If processor is empty
+
+            if (this.waitingTaskList.isEmpty()) { // If processor is empty AND waitingTaskList is also empty
+
+                Task T = taskList.remove(0); //Get the first task of the taskList
+
+                processor.setTaskInProcessor(T, T.getExecutionTimeRemaining()); //Put the task in the processor
+
+                if (!taskList.isEmpty()) { //If the taskList still not empty
+                    while (!taskList.isEmpty()) {
+                        this.waitingTaskList.add(taskList.remove(0)); //Clear the taskList, sending all the remaining tasks to the waitingTaskList
+                    }
+                }
+            }
+
+        } else { // If processor is not empty
+            while (!taskList.isEmpty()) {
+                this.waitingTaskList.add(taskList.remove(0));
+            }
+
+            Task taskInsideProcessor = processor.getRunningTaskInfo();
+            
+            Task shortestTimeTask = getTheTaskWithTheShortestTime();
+
+            if (shortestTimeTask.getExecutionTime() < taskInsideProcessor.getExecutionTime()) {
+               processor.didTaskExecutionFinished();
+
+                processor.setTaskInProcessor(shortestTimeTask, shortestTimeTask.getExecutionTimeRemaining());
+
+                this.waitingTaskList.add(taskInsideProcessor);
+
+            }
+
+        }
+
     }
 
+    public Task getTheTaskWithTheShortestTime() {
+        Task T;
+        Task returningTask = null;
+        for (int k = 0; k < this.waitingTaskList.size(); k++) {
+
+            T = this.waitingTaskList.get(k);
+
+            if (k == 0) {
+                returningTask = T;
+            }
+
+            if (T.getExecutionTime() < returningTask.getExecutionTime()) {
+                returningTask = T;
+
+            }
+
+        }
+
+        this.waitingTaskList.remove(returningTask);
+        return returningTask;
+    }
 
 }

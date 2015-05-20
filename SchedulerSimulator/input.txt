@@ -1,4 +1,3 @@
-FIFO
-MyTask-10-3
-othertask-5-3
-Other3Task-1-12
+SJF
+FirstTask-2-10
+SecondTask-4-1

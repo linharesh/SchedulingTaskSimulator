@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import schedulersimulator.Model.Policies;
 import schedulersimulator.Model.Processor;
 import schedulersimulator.Model.Task;
+import schedulersimulator.Model.Tasks;
 
 /**
  *
@@ -17,10 +18,24 @@ import schedulersimulator.Model.Task;
 public class SchedulerFifo extends Scheduler {
 
     private ArrayList<Task> waitingTaskList;
+    
+    
+    public SchedulerFifo(){
+    this.waitingTaskList = new ArrayList<>();
+    }
 
     @Override
     public void schedulerIteration(Processor processor) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        if (processor.isEmpty()) { // if the processor is empty
+
+            if (!this.waitingTaskList.isEmpty()) {
+               
+                Task T = waitingTaskList.remove(0);
+                processor.setTaskInProcessor(T, T.getExecutionTimeRemaining());
+            }
+        }
+
     }
 
     @Override
@@ -30,13 +45,12 @@ public class SchedulerFifo extends Scheduler {
 
             if (this.waitingTaskList.isEmpty()) { // If processor is empty AND waitingTaskList is also empty
 
-                
                 Task T = taskList.remove(0); //Get the first task of the taskList
-                
-                processor.setTaskInProcessor(T, T.getExecutionTimeRemaining()); //Puts the task on the processor
-                
+
+                processor.setTaskInProcessor(T, T.getExecutionTimeRemaining()); //Put the task in the processor
+
                 if (!taskList.isEmpty()) { //If the taskList still not empty
-                    while (!taskList.isEmpty()) {                      
+                    while (!taskList.isEmpty()) {
                         this.waitingTaskList.add(taskList.remove(0)); //Clear the taskList, sending all the remaining tasks to the waitingTaskList
                     }
                 }

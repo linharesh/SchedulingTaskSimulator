@@ -23,6 +23,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import schedulersimulator.Model.Policies;
 import SchedulerClasses.SchedulerFifo;
+import SchedulerClasses.SchedulerSJF;
 import schedulersimulator.Model.SearchForEvent;
 import schedulersimulator.Model.Task;
 import schedulersimulator.Model.Tasks;
@@ -54,11 +55,22 @@ public class Initializer {
             Logger.getLogger(Initializer.class.getName()).log(Level.SEVERE, null, ex);
         }
             
-            Scheduler scheduler = new SchedulerFifo();
-
+            Scheduler scheduler = null;
+            
+            if (instance.policy == Policies.Fifo){
+            scheduler = new SchedulerFifo();
+            }
+            
+            if (instance.policy == Policies.SJF){
+            scheduler = new SchedulerSJF();
+            }
+            
+            
+                
+                
             Tasks tasks = new Tasks((ArrayList<Task>) instance.taskList);
 
-            SearchForEvent.EventSearcher((SchedulerFifo) scheduler, tasks);
+            SearchForEvent.EventSearcher((Scheduler) scheduler, tasks);
     }
     
     

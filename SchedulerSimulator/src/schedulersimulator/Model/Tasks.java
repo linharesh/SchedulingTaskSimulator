@@ -17,7 +17,7 @@ public class Tasks {
 
     public ArrayList<Task> searchForArrivalsAtTime(int time) {
         
-        this.refreshDeletingDeliveredTasks(time);
+  //      this.refreshDeletingDeliveredTasks(time);
 
         ArrayList<Task> returningArray = new ArrayList();
 
