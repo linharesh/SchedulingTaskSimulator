@@ -21,74 +21,81 @@ import java.util.List;
 import schedulersimulator.Model.Policies;
 import schedulersimulator.Model.Task;
 
-public class InputFileReader {
 
-    private final String inputFileName = "input.txt";
+
+/**Class responsible for reading the text file.
+ * When an instance of this class is created, it reads all the information from the 
+ * input text file and stores all this information in the class instance.
+ * 
+ */
+public class InputFileReader {
     
     public Policies policy;
     
     public  List<Task> taskList;
-
-    public InputFileReader(){
-        try {
-            this.read();
-        } catch (IOException ex) {
-            ErrorSender.generalInputFileReadingError();
-        }
+    
+    
+    /**Class constructor
+     * Makes a call to the InputFileReader.read method, which reads the input text file
+     * 
+     * @param inputFileName The name of the input file text to be read. Eg: "input.txt"
+     */
+    public InputFileReader(String inputFileName){
+        this.read(inputFileName);
     }
     
-    
-    public void read() throws IOException {
+    /** Method that reads the input text file.
+     *  This is a private method.
+     *  It should not be called outside the InputFileReader class.
+     * 
+     * @param inputFileName The name of the input file text to be read. Eg: "input.txt"
+     */
+    private void read(String inputFileName) {
         try {
-            BufferedReader inputFileReader = new BufferedReader(new FileReader(this.inputFileName));
-
-            String schedulingPolicy = inputFileReader.readLine();
-
-            
+            BufferedReader inputFileReader = new BufferedReader(new FileReader(inputFileName));
+            String schedulingPolicy = null;
+            try {
+                schedulingPolicy = inputFileReader.readLine();
+            } catch (IOException ex) {
+                ErrorSender.inputFileReadingError();
+            }
             if (schedulingPolicy == null) {
                 ErrorSender.invalidTextFile();
             }
-
             this.policy = Policies.returnPolicieByName(schedulingPolicy);
-            
             if (this.policy == null) {
                 ErrorSender.invalidSchedulingPolicy();
                 return;
             }
-            
             this.taskList = new ArrayList();
-
-            String taskStringInfo = inputFileReader.readLine();
-
-            while (taskStringInfo != null) {
-
-                String[] splitedTaskStringInfo = taskStringInfo.split("-");
-
-                String arrivalTimeString = splitedTaskStringInfo[1];
-
-                int arrivalTimeInt = Integer.parseInt(arrivalTimeString);
-
-                String executionTimeString = splitedTaskStringInfo[2];
-
-                int executionTimeInt = Integer.parseInt(executionTimeString);
-
-                Task T = new Task(splitedTaskStringInfo[0], arrivalTimeInt, executionTimeInt);
-
-                System.out.println(T.toString());
-
-                taskList.add(T);
-
+            String taskStringInfo = null;
+            try {
                 taskStringInfo = inputFileReader.readLine();
-
+            } catch (IOException ex) {
+                ErrorSender.inputFileReadingError();
             }
-            
-            inputFileReader.close();
-            
-            
+            while (taskStringInfo != null) {
+                String[] splitedTaskStringInfo = taskStringInfo.split("-");
+                String arrivalTimeString = splitedTaskStringInfo[1];
+                int arrivalTimeInt = Integer.parseInt(arrivalTimeString);
+                String executionTimeString = splitedTaskStringInfo[2];
+                int executionTimeInt = Integer.parseInt(executionTimeString);
+                Task T = new Task(splitedTaskStringInfo[0], arrivalTimeInt, executionTimeInt);
+                System.out.println(T.toString());
+                taskList.add(T);
+                try {
+                    taskStringInfo = inputFileReader.readLine();
+                } catch (IOException ex) {
+                    ErrorSender.inputFileReadingError();
+                }
+            }
+            try {
+                inputFileReader.close();
+            } catch (IOException ex) {
+                ErrorSender.errorWhileClosingInputFile();
+            }
         } catch (FileNotFoundException ex) {
             ErrorSender.fileNotFound();
         }
-
     }
-
 }

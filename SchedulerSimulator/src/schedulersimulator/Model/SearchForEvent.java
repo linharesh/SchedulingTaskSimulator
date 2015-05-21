@@ -1,18 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Scheduling Tasks Simulator Developers: Henrique Linhares, Raphael
+ * Quintanilha, Fabrizio Moura and Diogo Souza.
+ *
+ * Universidade Federal Fluminense
+ *
+ * https://github.com/linharesh/SchedulingTaskSimulator
+ *
+ * Please check the software documentation for more information.
  */
+
 package schedulersimulator.Model;
 
 import SchedulerClasses.Scheduler;
 import SchedulerClasses.SchedulerFifo;
 import schedulersimulator.InOutFiles.OutputFileWriter;
 import java.util.ArrayList;
+import schedulersimulator.InOutFiles.NotificationSender;
 
 /**
  *
- * @author Henrique
  */
 public class SearchForEvent {
     
@@ -52,13 +58,13 @@ public class SearchForEvent {
         
     }
     
-    public static void EventSearcher(Scheduler scheduler, Tasks tasks) {
+    public static void eventSearcher(Scheduler scheduler, Tasks tasks) {
         SearchForEvent.time = 0;
         Processor processor = new Processor();
         processor.setTime(0);
 
         // while (!allTasksHaveFinished(tasks, processor, scheduler)) {
-        while (time < 500) {
+        while (time < 1000) {
             System.out.println("Search for event is iterating! time: " + time);
 
             //searchIteration(SearchForEvent.time, scheduler, tasks, processor);
@@ -79,8 +85,8 @@ public class SearchForEvent {
             processor.setTime(time);
         }
         
-        OutputFileWriter.close();
-        
+        OutputFileWriter.closeFile();
+        NotificationSender.didFinishSimulation();
     }
     
 }

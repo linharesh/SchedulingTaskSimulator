@@ -25,14 +25,22 @@ import schedulersimulator.Model.Tasks;
  * the class InputFileReader creates data structures, and makes the call to the
  * method of EventSearcher SearchForEvent class, which initiates the simulation.
  *
- * @author Henrique
  */
 public class Initializer {
 
-    private final String inputFileName = "input.txt";
+    /**
+     * The name of the input text file
+     */
+    private static final String inputFileName = "input.txt";
 
-    public static void main(String[] args) throws IOException {
-        InputFileReader fileReaderInstance = new InputFileReader();
+    /**
+     * The application Main Method Calls the InputFileReader to read the data
+     * from the text file. When all data is on memory, the simulation starts.
+     *
+     * @param args Default args param. This param has no utility until now.
+     */
+    public static void main(String[] args) {
+        InputFileReader fileReaderInstance = new InputFileReader(Initializer.inputFileName);
         prepareForStartSimulation(fileReaderInstance);
     }
 
@@ -45,24 +53,15 @@ public class Initializer {
      * such as the scheduling policy and the tasks.
      */
     public static void prepareForStartSimulation(InputFileReader fileReaderInstance) {
-        try {
-            //Open the output file to start writing the logs
-            OutputFileWriter.setup();
-        } catch (IOException ex) {
-            ErrorSender.errorOpeningOutputFile();
-        }
-
+        OutputFileWriter.openFile();
         Scheduler scheduler = null;
-
         if (fileReaderInstance.policy == Policies.Fifo) {
             scheduler = new SchedulerFifo();
         }
-
         if (fileReaderInstance.policy == Policies.SJF) {
             scheduler = new SchedulerSJF();
         }
-
         Tasks tasks = new Tasks((ArrayList<Task>) fileReaderInstance.taskList);
-        SearchForEvent.EventSearcher((Scheduler) scheduler, tasks);
+        SearchForEvent.eventSearcher((Scheduler) scheduler, tasks);
     }
 }

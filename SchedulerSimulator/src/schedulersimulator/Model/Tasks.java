@@ -15,7 +15,6 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Henrique
  */
 public class Tasks {
 
@@ -27,22 +26,14 @@ public class Tasks {
      * @return An ArrayList containing all the tasks that have Arrival Time equals to the param "time"
      */
     public ArrayList<Task> searchForArrivalsAtTime(int time) {
- 
-
         ArrayList<Task> returningArray = new ArrayList();
-
         Task T;
-        for (int k = 0; k < this.taskList.size(); k++) {
-
-            T = taskList.get(k);
-
+        for (Task taskList1 : this.taskList) {
+            T = taskList1;
             if (T.getArrivalTime() == time) {
                 returningArray.add(T);
-
             }
-
         }
-
         return returningArray;
     }
 

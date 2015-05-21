@@ -1,11 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Scheduling Tasks Simulator Developers: Henrique Linhares, Raphael
+ * Quintanilha, Fabrizio Moura and Diogo Souza.
+ *
+ * Universidade Federal Fluminense
+ *
+ * https://github.com/linharesh/SchedulingTaskSimulator
+ *
+ * Please check the software documentation for more information.
  */
 package schedulersimulator.InOutFiles;
 
-import schedulersimulator.InOutFiles.ErrorSender;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -15,83 +19,109 @@ import java.util.logging.Logger;
 import schedulersimulator.Model.Task;
 
 /**
+ * Class responsible for saving the tasks info into report output file.
  *
- * @author HenriqueLinhares
  */
 public class OutputFileWriter {
 
+    /**
+     * The name of the output file. Eg: otuput.txt
+     */
     private static final String outputFileName = "output.txt";
 
+    /**
+     * A representation of the output file
+     */
     private static File outputFile = new File(OutputFileWriter.outputFileName);
 
+    /**
+     * Instance of FileWriter
+     */
     private static FileWriter filewriter;
 
+    /**
+     * Instance of BufferedWriter
+     */
     private static BufferedWriter bwriter;
 
-    public static void setup() throws IOException {
-
-        // if file doesnt exists, then create it
-        if (!OutputFileWriter.outputFile.exists()) {
-            OutputFileWriter.outputFile.createNewFile();
-        }
-
-        OutputFileWriter.filewriter = new FileWriter(OutputFileWriter.outputFile.getAbsoluteFile());
-        OutputFileWriter.bwriter = new BufferedWriter(OutputFileWriter.filewriter);
-
-        OutputFileWriter.bwriter.write("#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*");
-        OutputFileWriter.bwriter.newLine();
-        OutputFileWriter.bwriter.write("$$$$$  <  Scheduling Report  >   $$$$$");
-        OutputFileWriter.bwriter.newLine();
-        OutputFileWriter.bwriter.write("#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*");
-        OutputFileWriter.bwriter.newLine();
-        OutputFileWriter.bwriter.newLine();
-
-    }
-    
-    public static void writeTaskEnteringProcessorEvent(Task T, int time){
-       
+    /**
+     * Method responsible for creating the file output of text and open it for
+     * writing data
+     *
+     */
+    public static void openFile() {
         try {
+            // if file doesnt exists, then create it
+            if (!OutputFileWriter.outputFile.exists()) {
+                OutputFileWriter.outputFile.createNewFile();
+            }
+            OutputFileWriter.filewriter = new FileWriter(OutputFileWriter.outputFile.getAbsoluteFile());
+            OutputFileWriter.bwriter = new BufferedWriter(OutputFileWriter.filewriter);
+            OutputFileWriter.bwriter.write("#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*");
             OutputFileWriter.bwriter.newLine();
-            OutputFileWriter.bwriter.write("The Task named "+T.getName()+" entered the processor at the time "+time);
+            OutputFileWriter.bwriter.write("$$$$$  <  Scheduling Report  >   $$$$$");
+            OutputFileWriter.bwriter.newLine();
+            OutputFileWriter.bwriter.write("#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*");
+            OutputFileWriter.bwriter.newLine();
             OutputFileWriter.bwriter.newLine();
         } catch (IOException ex) {
-           ErrorSender.errorWritingTaskInfoIntoReport();
+            ErrorSender.errorCreatingOutputFile();
         }
-   
     }
-    
-    
-    public static void writeTaskLeavingProcessorEvent(Task T, int time){
-       
+
+    /**
+     * Writes in the text output file the information about the entry of a task
+     * on the processor. It is strongly recommended for this method to be only
+     * called by the class Processor
+     *
+     * @param T The task that is entering the processor
+     * @param time The time that the task is entering
+     */
+    public static void writeTaskEnteringProcessorEvent(Task T, int time) {
         try {
             OutputFileWriter.bwriter.newLine();
-            OutputFileWriter.bwriter.write("The Task named "+T.getName()+" have left the processor at the time "+time);
+            OutputFileWriter.bwriter.write("The Task named " + T.getName() + " entered the processor at the time " + time);
             OutputFileWriter.bwriter.newLine();
         } catch (IOException ex) {
-           ErrorSender.errorWritingTaskInfoIntoReport();
+            ErrorSender.errorWritingTaskInfoIntoReport();
         }
-   
     }
-    
-    
-    
-    
 
-    public static void close() {
+    /**
+     * Writes in the text output file the information about the leaving of a task
+     * on the processor. It is strongly recommended for this method to be only
+     * called by the class Processor
+     *
+     * @param T The task that is leaving the processor
+     * @param time The time that the task is leaving
+     */
+    public static void writeTaskLeavingProcessorEvent(Task T, int time) {
         try {
-        OutputFileWriter.bwriter.newLine();    
-        OutputFileWriter.bwriter.write("#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*");
-        OutputFileWriter.bwriter.newLine();
-        OutputFileWriter.bwriter.write("Report generated by SchedulerSimulator");
-        OutputFileWriter.bwriter.newLine();
-        OutputFileWriter.bwriter.write("Developers team: Henrique Linhares, Raphael Quintanilha, Diogo Souza and Fabrizio Moura.");
-        OutputFileWriter.bwriter.newLine();
-        OutputFileWriter.bwriter.write("Universidade Federal Fluminense");
-        
+            OutputFileWriter.bwriter.newLine();
+            OutputFileWriter.bwriter.write("The Task named " + T.getName() + " have left the processor at the time " + time);
+            OutputFileWriter.bwriter.newLine();
+        } catch (IOException ex) {
+            ErrorSender.errorWritingTaskInfoIntoReport();
+        }
+    }
+
+    /**
+     * Method that closes the output report file. It is ESSENTIAL that this
+     * method is called at the end of the simulation.
+     */
+    public static void closeFile() {
+        try {
+            OutputFileWriter.bwriter.newLine();
+            OutputFileWriter.bwriter.write("#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*");
+            OutputFileWriter.bwriter.newLine();
+            OutputFileWriter.bwriter.write("Report generated by SchedulerSimulator");
+            OutputFileWriter.bwriter.newLine();
+            OutputFileWriter.bwriter.write("Developers team: Henrique Linhares, Raphael Quintanilha, Diogo Souza and Fabrizio Moura.");
+            OutputFileWriter.bwriter.newLine();
+            OutputFileWriter.bwriter.write("Universidade Federal Fluminense");
             OutputFileWriter.bwriter.close();
         } catch (IOException ex) {
             ErrorSender.errorClosingOutputFile();
         }
     }
-
 }

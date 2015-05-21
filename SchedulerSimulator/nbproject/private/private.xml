@@ -5,15 +5,16 @@
         <group>
             <file>file:/Users/HenriqueLinhares/GitHub/SchedulingTaskSimulator/SchedulerSimulator/src/schedulersimulator/InOutFiles/Initializer.java</file>
             <file>file:/Users/HenriqueLinhares/GitHub/SchedulingTaskSimulator/SchedulerSimulator/src/schedulersimulator/Model/Processor.java</file>
-            <file>file:/Users/HenriqueLinhares/GitHub/SchedulingTaskSimulator/SchedulerSimulator/src/schedulersimulator/Model/SearchForEvent.java</file>
             <file>file:/Users/HenriqueLinhares/GitHub/SchedulingTaskSimulator/SchedulerSimulator/src/schedulersimulator/Model/Policies.java</file>
-            <file>file:/Users/HenriqueLinhares/GitHub/SchedulingTaskSimulator/SchedulerSimulator/src/schedulersimulator/InOutFiles/InputFileReader.java</file>
+            <file>file:/Users/HenriqueLinhares/GitHub/SchedulingTaskSimulator/SchedulerSimulator/src/schedulersimulator/InOutFiles/NotificationSender.java</file>
             <file>file:/Users/HenriqueLinhares/GitHub/SchedulingTaskSimulator/SchedulerSimulator/src/SchedulerClasses/SchedulerSJF.java</file>
             <file>file:/Users/HenriqueLinhares/GitHub/SchedulingTaskSimulator/SchedulerSimulator/src/schedulersimulator/Model/Task.java</file>
-            <file>file:/Users/HenriqueLinhares/GitHub/SchedulingTaskSimulator/SchedulerSimulator/src/schedulersimulator/InOutFiles/OutputFileWriter.java</file>
-            <file>file:/Users/HenriqueLinhares/GitHub/SchedulingTaskSimulator/SchedulerSimulator/src/schedulersimulator/InOutFiles/ErrorSender.java</file>
             <file>file:/Users/HenriqueLinhares/GitHub/SchedulingTaskSimulator/SchedulerSimulator/src/SchedulerClasses/Scheduler.java</file>
             <file>file:/Users/HenriqueLinhares/GitHub/SchedulingTaskSimulator/SchedulerSimulator/src/SchedulerClasses/SchedulerFifo.java</file>
+            <file>file:/Users/HenriqueLinhares/GitHub/SchedulingTaskSimulator/SchedulerSimulator/src/schedulersimulator/Model/SearchForEvent.java</file>
+            <file>file:/Users/HenriqueLinhares/GitHub/SchedulingTaskSimulator/SchedulerSimulator/src/schedulersimulator/InOutFiles/InputFileReader.java</file>
+            <file>file:/Users/HenriqueLinhares/GitHub/SchedulingTaskSimulator/SchedulerSimulator/src/schedulersimulator/InOutFiles/OutputFileWriter.java</file>
+            <file>file:/Users/HenriqueLinhares/GitHub/SchedulingTaskSimulator/SchedulerSimulator/src/schedulersimulator/InOutFiles/ErrorSender.java</file>
             <file>file:/Users/HenriqueLinhares/GitHub/SchedulingTaskSimulator/SchedulerSimulator/src/schedulersimulator/Model/Tasks.java</file>
         </group>
     </open-files>
