@@ -86,7 +86,7 @@ public class SchedulerSJF extends Scheduler {
             T = this.waitingTaskList.get(k);
             if (k == 0) {
                 returningTask = T;
-            }
+            }            
             if (T.getExecutionTime() < returningTask.getExecutionTime()) {
                 returningTask = T;
             }

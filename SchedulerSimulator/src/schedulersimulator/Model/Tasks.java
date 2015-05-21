@@ -13,7 +13,11 @@ package schedulersimulator.Model;
 
 import java.util.ArrayList;
 
-/**
+/**This class represents all the tasks that have 
+ * not yet arrived to the simulation.
+ * 
+ * A task only arrive in the simulation when the arrival time of the task is
+ * equal to the simulation time.
  *
  */
 public class Tasks {
@@ -37,15 +41,27 @@ public class Tasks {
         return returningArray;
     }
 
+    /** Constructor
+     * 
+     * @param taskList A list with all tasks
+     */
     public Tasks(ArrayList<Task> taskList) {
-        this.taskList = taskList;
+        this.setTaskList(taskList);
     }
 
+    /** taskList Getter
+     * 
+     * @return The taskList
+     */
     public ArrayList<Task> getTaskList() {
         return taskList;
     }
 
-    public void setTaskList(ArrayList<Task> taskList) {
+    /** taskList Setter
+     * 
+     * @param taskList the TaskList
+     */
+    private void setTaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
 

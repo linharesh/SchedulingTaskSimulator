@@ -14,8 +14,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import schedulersimulator.Model.Task;
 
 /**
@@ -32,7 +30,7 @@ public class OutputFileWriter {
     /**
      * A representation of the output file
      */
-    private static File outputFile = new File(OutputFileWriter.outputFileName);
+    private static final File outputFile = new File(OutputFileWriter.outputFileName);
 
     /**
      * Instance of FileWriter

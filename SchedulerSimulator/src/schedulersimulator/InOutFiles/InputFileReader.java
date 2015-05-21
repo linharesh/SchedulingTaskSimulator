@@ -81,7 +81,6 @@ public class InputFileReader {
                 String executionTimeString = splitedTaskStringInfo[2];
                 int executionTimeInt = Integer.parseInt(executionTimeString);
                 Task T = new Task(splitedTaskStringInfo[0], arrivalTimeInt, executionTimeInt);
-                System.out.println(T.toString());
                 taskList.add(T);
                 try {
                     taskStringInfo = inputFileReader.readLine();

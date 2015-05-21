@@ -11,7 +11,6 @@
 package schedulersimulator.InOutFiles;
 
 import SchedulerClasses.Scheduler;
-import java.io.IOException;
 import java.util.ArrayList;
 import schedulersimulator.Model.Policies;
 import SchedulerClasses.SchedulerFifo;
@@ -50,7 +49,7 @@ public class Initializer {
      *
      * @param fileReaderInstance An instance of the InputFileReader Class. The
      * instance of this class contains all the information of the Input File,
-     * such as the scheduling policy and the tasks.
+     * such as the chosen scheduling policy and the tasks.
      */
     public static void prepareForStartSimulation(InputFileReader fileReaderInstance) {
         OutputFileWriter.openFile();

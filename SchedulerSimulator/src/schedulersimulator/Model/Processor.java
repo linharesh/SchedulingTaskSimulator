@@ -73,9 +73,17 @@ public class Processor {
      */
     public Task removeTaskFromProcessor() {
         OutputFileWriter.writeTaskLeavingProcessorEvent(taskInProcessor, time);
-        Task T = this.taskInProcessor;
-        this.taskInProcessor = null;
+        Task T = this.getRunningTaskInfo();
+        this.setTaskInProcessorAsNull();
         return T;
+    }
+
+    /**
+     * Set the value of the taskInProcessor as NULL It should be used ONLY
+     * inside Processor class.
+     */
+    private void setTaskInProcessorAsNull() {
+        this.taskInProcessor = null;
     }
 
     /**
@@ -85,8 +93,6 @@ public class Processor {
      */
     public void setTaskInProcessor(Task taskInProcessor) {
         OutputFileWriter.writeTaskEnteringProcessorEvent(taskInProcessor, time);
-        System.out.println("Task entering processor");
-        System.out.println("Task description: " + taskInProcessor.toString());
         this.taskInProcessor = taskInProcessor;
     }
 
@@ -105,16 +111,13 @@ public class Processor {
      * return nothing (return null)
      */
     public Task processorIteration(int time) {
-        System.out.println("Processor iterating");
-        if (this.taskInProcessor != null) {
+        if (!this.isEmpty()) { // if processor is not empty
             if (this.taskInProcessor.getExecutionTimeRemaining() <= 0) {
                 return removeTaskFromProcessor();
             }
             this.taskInProcessor.setExecutionTimeRemaining(this.taskInProcessor.getExecutionTimeRemaining() - 1);
-        } else {
-            System.out.println("Processor empty");
         }
-        this.time = time;
+        this.setTime(time);
         return null;
     }
 
