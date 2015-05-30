@@ -11,10 +11,8 @@
 package schedulersimulator.InOutFiles;
 
 import SchedulerClasses.Scheduler;
+import SchedulerClasses.SchedulerFactory;
 import java.util.ArrayList;
-import schedulersimulator.Model.Policies;
-import SchedulerClasses.SchedulerFifo;
-import SchedulerClasses.SchedulerSJF;
 import schedulersimulator.Model.SearchForEvent;
 import schedulersimulator.Model.Task;
 import schedulersimulator.Model.Tasks;
@@ -53,13 +51,7 @@ public class Initializer {
      */
     public static void prepareForStartSimulation(InputFileReader fileReaderInstance) {
         OutputFileWriter.openFile();
-        Scheduler scheduler = null;
-        if (fileReaderInstance.policy == Policies.Fifo) {
-            scheduler = new SchedulerFifo();
-        }
-        if (fileReaderInstance.policy == Policies.SJF) {
-            scheduler = new SchedulerSJF();
-        }
+        Scheduler scheduler = SchedulerFactory.createScheduler(fileReaderInstance.policy);
         Tasks tasks = new Tasks((ArrayList<Task>) fileReaderInstance.taskList);
         SearchForEvent.eventSearcher((Scheduler) scheduler, tasks);
     }

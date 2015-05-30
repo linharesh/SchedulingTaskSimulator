@@ -38,7 +38,7 @@ public class SchedulerFifo extends Scheduler {
     }
 
     @Override
-    public void schedulerIteration(Processor processor) {
+    public void schedule(Processor processor) {
         if (processor.isEmpty()) { // if the processor is empty
             if (!this.waitingTaskList.isEmpty()) {
                 Task T = waitingTaskList.remove(0);

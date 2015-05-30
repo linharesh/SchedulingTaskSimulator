@@ -76,13 +76,13 @@ public class SearchForEvent {
         processor.setTime(0);
         while (time < 1000) {
             if (tasks.searchForArrivalsAtTime(time).isEmpty()) {
-                scheduler.schedulerIteration(processor);
+                scheduler.schedule(processor);
             } else {
                 scheduler.didArrivedTask(tasks.searchForArrivalsAtTime(time), processor);
             }
             Task T = processor.processorIteration(SearchForEvent.time);
             if (T != null) {
-                scheduler.schedulerIteration(processor);
+                scheduler.schedule(processor);
                 processor.processorIteration(SearchForEvent.time);
             }
             SearchForEvent.setTime(SearchForEvent.getTime() + 1);

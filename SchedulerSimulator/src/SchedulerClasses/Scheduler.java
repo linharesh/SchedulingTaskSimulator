@@ -30,17 +30,24 @@ public abstract class Scheduler {
      * In this method 
      * implementation, you can choose to remove, add or change the task in the processor.
      * 
+     * Obligatory Implementation
      * 
      * @param taskList An ArrayList containig the tasks that arrived.
      * @param processor  The simulator processor.
      */
     public abstract void didArrivedTask(ArrayList<Task> taskList, Processor processor);
     
-    /**Method called every time the scheduler iterate. In this method 
+    /**Method called every time the scheduler makes a schedule. In this method 
      * implementation, you can choose to remove, add or change the task in the processor.
+     * 
+     * Obligatory Implementation
      * 
      * @param processor The simulator processor.
      */
-    public abstract void schedulerIteration(Processor processor);
+    public abstract void schedule(Processor processor);
+    
+    
+    
+    
     
 }
