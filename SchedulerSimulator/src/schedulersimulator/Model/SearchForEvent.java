@@ -39,6 +39,9 @@ public class SearchForEvent {
         time = aTime;
     }
     
+    /**Constructor
+     * Set the time as 0 (zero)
+     */
     public SearchForEvent() {
         setTime(0);
     }
@@ -74,7 +77,8 @@ public class SearchForEvent {
         SearchForEvent.setTime(0);
         Processor processor = new Processor();
         processor.setTime(0);
-        while (time < 1000) {
+        int timeToEndSimulation = tasks.calculateSimulationEndTime();
+        while (time <= timeToEndSimulation) {
             if (tasks.searchForArrivalsAtTime(time).isEmpty()) {
                 scheduler.schedule(processor);
             } else {
