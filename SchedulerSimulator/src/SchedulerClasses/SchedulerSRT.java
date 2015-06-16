@@ -19,7 +19,7 @@ import schedulersimulator.Model.Task;
  * task that will run first will be the one with the shortest execution time.
  *
  */
-public class SchedulerSJF extends Scheduler {
+public class SchedulerSRT extends Scheduler {
 
     /**
      * An ArrayList containing the tasks that are queued waiting to enter the
@@ -32,7 +32,7 @@ public class SchedulerSJF extends Scheduler {
      * waitingTaskList. Its necessary to create a instance of the ArrayList()
      * before start using it.
      */
-    public SchedulerSJF() {
+    public SchedulerSRT() {
         this.waitingTaskList = new ArrayList<>();
     }
 
@@ -40,7 +40,7 @@ public class SchedulerSJF extends Scheduler {
     public void schedule(Processor processor) {
         if (processor.isEmpty()) { // if the processor is empty
             if (!this.waitingTaskList.isEmpty()) {
-                Task T = this.getTheTaskWithTheShortestTime();
+                Task T = this.getTheTaskWithTheShortestRemainingTime();
                 processor.setTaskInProcessor(T);
             }
         }
@@ -63,10 +63,10 @@ public class SchedulerSJF extends Scheduler {
                 this.waitingTaskList.add(taskList.remove(0));
             }
             Task taskInsideProcessor = processor.getRunningTaskInfo();
-            Task shortestTimeTask = getTheTaskWithTheShortestTime();
-            if (shortestTimeTask.getExecutionTime() < taskInsideProcessor.getExecutionTime()) {
+            Task shortestTimeLeftTask = getTheTaskWithTheShortestRemainingTime();
+            if (shortestTimeLeftTask.getExecutionTimeRemaining()< taskInsideProcessor.getExecutionTimeRemaining()) {
                 processor.removeTaskFromProcessor();
-                processor.setTaskInProcessor(shortestTimeTask);
+                processor.setTaskInProcessor(shortestTimeLeftTask);
                 this.waitingTaskList.add(taskInsideProcessor);
             }
         }
@@ -79,7 +79,7 @@ public class SchedulerSJF extends Scheduler {
      *
      * @return The task with the shortest job time.
      */
-    private Task getTheTaskWithTheShortestTime() {
+    private Task getTheTaskWithTheShortestRemainingTime() {
         Task T;
         Task returningTask = null;
         for (int k = 0; k < this.waitingTaskList.size(); k++) {
@@ -87,7 +87,7 @@ public class SchedulerSJF extends Scheduler {
             if (k == 0) {
                 returningTask = T;
             }            
-            if (T.getExecutionTime() < returningTask.getExecutionTime()) {
+            if (T.getExecutionTimeRemaining()< returningTask.getExecutionTimeRemaining()) {
                 returningTask = T;
             }
         }

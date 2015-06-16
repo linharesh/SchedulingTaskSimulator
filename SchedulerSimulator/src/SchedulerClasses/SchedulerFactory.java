@@ -41,8 +41,8 @@ public class SchedulerFactory {
             returningScheduler = new SchedulerFifo();
         }
         
-        if (policieInstance == Policies.SJF) {
-            returningScheduler = new SchedulerSJF();
+        if (policieInstance == Policies.SRT) {
+            returningScheduler = new SchedulerSRT();
         }
 
         return returningScheduler;

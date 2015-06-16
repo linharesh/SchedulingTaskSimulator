@@ -17,7 +17,7 @@ package schedulersimulator.Model;
  */
 public enum Policies {
 
-    Fifo, SJF;
+    Fifo, SRT;
 
     /**
      * This method recives a string with a name of a scheduling policie and
@@ -31,8 +31,8 @@ public enum Policies {
         if (S.equalsIgnoreCase("fifo")) {
             return Policies.Fifo;
         }
-        if (S.equalsIgnoreCase("sjf")) {
-            return Policies.SJF;
+        if (S.equalsIgnoreCase("SRT")) {
+            return Policies.SRT;
         }
         return null;
     }

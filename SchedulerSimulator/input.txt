@@ -1,3 +1,3 @@
-SJF
-FirstTask-5-10
-SecondTask-7-2
+FIFO
+FirstTask-2-10
+SecondTask-5-5
